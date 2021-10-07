@@ -9,7 +9,7 @@ def naiveDirectedHD(A: MetricSpace, B: MetricSpace, cmax: float = 0):
         cmin = float('inf')
         cont = True
         for b in B:
-            d = A.distfn(a,b)
+            d = A.dist(a,b)
             if d < cmax:
                 cont = False
                 break
