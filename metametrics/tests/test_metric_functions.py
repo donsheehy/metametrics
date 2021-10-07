@@ -1,6 +1,7 @@
 # metametrics/metric_functions.py
 
 import unittest
+from unittest import skip
 
 from metricspaces import MetricSpace
 from greedypermutation.clarksongreedy import greedy
@@ -28,19 +29,29 @@ class MetricTest(unittest.TestCase):
 		self.p11 = MetricSpace([Point(1,1)], dist=self.dist)
 		self.p01 = MetricSpace([Point(0,1)], dist=self.dist)
 		self.p10 = MetricSpace([Point(1,0)], dist=self.dist)
-		print("Space 0: \n",str(self.spaces[0].points))
-
-	def test_naiveHD_sanity(self):
-		test_pairs_expected = [
+		self.test_pairs_expected = [
 			[self.null_space, self.null_space, 0],
 			[self.null_space, self.origin_space, float('inf')],
 			[self.origin_space, self.null_space, float('inf')],
 			[self.p11, self.p01, 1],
 			[self.p11, self.p10, 1]
 		]
-		for spcA, spcB, expected in test_pairs_expected:
+
+	def test_naiveHD_sanity(self):
+		for spcA, spcB, expected in self.test_pairs_expected:
 				with self.subTest(spcA = spcA, spcB = spcB, expected = expected):
 					self.assertEqual(naiveHD(spcA,spcB), expected)
+
+	def test_greedyHD_sanity(self):
+		for spcA, spcB, expected in self.test_pairs_expected:
+				with self.subTest(spcA = spcA, spcB = spcB, expected = expected):
+					self.assertEqual(greedyHD(spcA,spcB), expected)
+						
+	def test_against_naiveHD_greedyHD(self):
+		for spcA, spcB, _ in self.test_pairs_expected:
+				with self.subTest(spcA = spcA, spcB = spcB):
+					self.assertEqual(naiveHD(spcA,spcB), greedyHD(spcA,spcB))
+					self.assertEqual(naiveHD(spcA,spcB), greedyHD(spcB,spcA))
 
 		
 
