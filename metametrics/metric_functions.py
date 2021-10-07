@@ -27,9 +27,9 @@ def calcGreedy(A, B):
 
 def greedyHD(A: MetricSpace, B: MetricSpace):
     # cache of A_g - no of distances A_g had to compute
-    X1, X2 = calcGreedy(A, B)
-    A_g = MetricSpace(points = X1, dist = A.distfn, cache = A.cache, turnoffcache = A.turnoffcache)
-    B_g = MetricSpace(points = X2, dist = B.distfn, cache = B.cache, turnoffcache = B.turnoffcache)
+    d_A, d_B = calcGreedy(A, B)
+    A_g = MetricSpace(points = d_A, dist = A.distfn, cache = A.cache, turnoffcache = A.turnoffcache)
+    B_g = MetricSpace(points = d_B, dist = B.distfn, cache = B.cache, turnoffcache = B.turnoffcache)
     return naiveHD(A_g, B_g)
 
 def l_inf(p: Point, q: Point):
