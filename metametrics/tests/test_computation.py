@@ -1,4 +1,8 @@
+# metametrics/tests/test_computation.py
+
 import unittest
+from unittest import skipIf
+from metametrics.tests.test_config.test_config import TEST_COMPUTATIONS
 
 from metricspaces import MetricSpace
 from greedypermutation.clarksongreedy import greedy
@@ -48,6 +52,8 @@ class ComputationTest(unittest.TestCase):
 		self.A.cache = {}
 		self.B.cache = {}
 	
+	@skipIf(not TEST_COMPUTATIONS,
+			"Skipping computational tests")
 	def test_greedy(self):
 		self.clear_cache()
 
@@ -62,6 +68,8 @@ class ComputationTest(unittest.TestCase):
 		d = naiveHD(A_g, B_g)
 		self.print_cache(is_before=False, A=A_g, B=B_g)
 
+	@skipIf(not TEST_COMPUTATIONS,
+			"Skipping computational tests")
 	def test_naive(self):
 		self.clear_cache()
 
@@ -71,4 +79,4 @@ class ComputationTest(unittest.TestCase):
 		self.print_cache(is_before=False)
 
 if __name__ == '__main__':
-    unittest.main()
+	unittest.main()

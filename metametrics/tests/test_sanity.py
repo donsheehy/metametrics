@@ -1,3 +1,5 @@
+# metametrics/tests/test_sanity.py
+
 import unittest
 
 class SanityTest(unittest.TestCase):
