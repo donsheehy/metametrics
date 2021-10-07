@@ -1,2 +1,2 @@
 from metametrics.point import Point
-from metametrics.metric_functions import naiveHD,l_inf
+from metametrics.metric_functions import naiveHD,greedyHD,calcGreedy,l_inf
